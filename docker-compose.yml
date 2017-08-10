@@ -2,6 +2,7 @@ version: '2'
 services:
   mongo:
     image: "mongo:3.0"
+    command: "mongod --smallfiles"
 
   jetty:
     image: "jetty:9.4"
@@ -9,4 +10,4 @@ services:
       - mongo
     volumes:
       - .:/var/lib/jetty/webapps/proj
-    command: 'java -jar "/var/lib/jetty/start.jar" --add-to-startd=nosql'
+    command: 'bash -c "java -jar /usr/local/jetty/start.jar --create-startd --add-to-start=session-store-mongo --approve-all-licenses && java -jar /usr/local/jetty/start.jar -Djetty.session.mongo.host=mongo"'
