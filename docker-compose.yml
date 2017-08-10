@@ -1,0 +1,12 @@
+version: '2'
+services:
+  mongo:
+    image: "mongo:3.0"
+
+  jetty:
+    image: "jetty:9.4"
+    links:
+      - mongo
+    volumes:
+      - .:/var/lib/jetty/webapps/proj
+    command: 'java -jar "/var/lib/jetty/start.jar" --add-to-startd=nosql'
