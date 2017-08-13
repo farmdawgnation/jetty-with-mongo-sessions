@@ -11,5 +11,5 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - /Users/mfarmer/Projects/github/jetty-with-mongo-sessions/target/scala-2.12/jetty-with-mongo-sessions_2.12-0.1-SNAPSHOT.war:/var/lib/jetty/webapps/jetty-with-mongo-sessions.war
+      - ./target/scala-2.12/jetty-with-mongo-sessions_2.12-0.1-SNAPSHOT.war:/var/lib/jetty/webapps/jetty-with-mongo-sessions.war
     command: 'bash -c "java -jar /usr/local/jetty/start.jar --create-startd --add-to-start=session-store-mongo --approve-all-licenses && java -jar /usr/local/jetty/start.jar -Djetty.session.mongo.host=mongo"'
