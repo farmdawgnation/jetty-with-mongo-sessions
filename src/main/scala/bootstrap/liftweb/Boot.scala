@@ -6,6 +6,7 @@ import Helpers._
 
 import common._
 import http._
+import js._
 import sitemap._
 import Loc._
 
@@ -22,6 +23,9 @@ class Boot {
     LiftRules.early.append(_.setCharacterEncoding("UTF-8"))
 
     LiftRules.servletSessionIdentifier = "nice_lift_session_thingy"
+
+    LiftRules.redirectAsyncOnSessionLoss = false
+LiftRules.noCometSessionCmd.default.set(() => JsCmds.Run("lift.rehydrateComets()"))
 
     LiftRules.securityRules = () => {
       SecurityRules(content = Some(ContentSecurityPolicy(
